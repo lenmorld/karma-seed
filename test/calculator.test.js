@@ -30,9 +30,21 @@ describe('Calculator', function() {
 
   // inject the HTML fixture for the tests
   beforeEach(function() {
+    // inserting fixtures manually
+    var fixture = '<div id="fixture"><input id="x" type="text">' + 
+    '<input id="y" type="text">' + 
+    '<input id="add" type="button" value="Add Numbers">' +
+    'Result: <span id="result" /></div>';
+
+  document.body.insertAdjacentHTML(
+    'afterbegin', 
+    fixture);
+    
+    /* when using html2js
     // Why this line? See: https://github.com/billtrik/karma-fixture/issues/3
     fixture.base = 'test';
     fixture.load('calculator.fixture.html');
+    */
 
     // init js lib
     window.calculator.init();
@@ -40,7 +52,10 @@ describe('Calculator', function() {
 
   // remove the html fixture from the DOM
   afterEach(function() {
+    document.body.removeChild(document.getElementById('fixture'));
+    /* when using html2js
     fixture.cleanup();
+    */
   });
 
   it('should calculate 3 for 1 + 2', function() {

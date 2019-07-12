@@ -1,6 +1,5 @@
-'use strict';
-
-var appConfig = require('./config');
+// Karma configuration
+// Generated on Fri Jul 12 2019 12:44:44 GMT-0400 (EDT)
 
 module.exports = function(config) {
   config.set({
@@ -12,7 +11,7 @@ module.exports = function(config) {
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
     frameworks: ['mocha', 'chai', 'fixture'],
-    // or can be: ['jasmine'],
+
 
     // list of files / patterns to load in the browser
     files: [
@@ -22,21 +21,22 @@ module.exports = function(config) {
     ],
 
 
-    // list of files to exclude
+    // list of files / patterns to exclude
     exclude: [
     ],
 
 
     // preprocess matching files before serving them to the browser
-    // available preprocessors: 
-    //      https://npmjs.org/browse/keyword/karma-preprocessor
-    preprocessors: appConfig.karma.preprocessors,
+    // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
+    preprocessors: {
+      'test/*.html' : ['html2js']
+    },
 
 
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: appConfig.karma.reporters,
+    reporters: ['progress'],
 
 
     // web server port
@@ -48,24 +48,25 @@ module.exports = function(config) {
 
 
     // level of logging
-    // possible values: config.LOG_DISABLE || config.LOG_ERROR || 
-    //      config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
+    // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
     logLevel: config.LOG_INFO,
 
 
-    // enable / disable watching file and executing tests 
-    // whenever any file changes
-    autoWatch: appConfig.karma.autoWatch,
+    // enable / disable watching file and executing tests whenever any file changes
+    autoWatch: true,
 
 
     // start these browsers
-    // available browser launchers: 
-    //  https://npmjs.org/browse/keyword/karma-launcher
-    browsers: appConfig.karma.browsers,
+    // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
+    browsers: ['Chrome'],
 
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
-    singleRun: appConfig.karma.singleRun
-  });
-};
+    singleRun: false,
+
+    // Concurrency level
+    // how many browser should be started simultaneous
+    concurrency: Infinity
+  })
+}
